@@ -1,0 +1,18 @@
+export const envVariables = {
+  PORT: {
+    description: 'The port number for the server.',
+    defaultValue: '3000'
+  },
+  MONGODB_URI: {
+    description: 'The URI for connecting to the MongoDB database.',
+    defaultValue: 'mongodb://localhost:27017/parser'
+  },
+  MAX_UPLOADED_FILES: {
+    description: 'Maximum number of uploaded files (Pdfs).',
+    defaultValue: '10'
+  },
+  AI_MICROSERVICE_URL: {
+    description: 'URL for the AI microservice.',
+    defaultValue: 'http://192.168.100.22:3001/api/aiService/callCommand'
+  }
+}

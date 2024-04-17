@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  linkopus-parserms:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+      - VERDACCIO_REGISTRY=${VERDACCIO_REGISTRY}
+      - VERDACCIO_TOKEN=${VERDACCIO_TOKEN}
+    image: linkopus-parserms
+    container_name: linkopus-parserms-Container
+    volumes:
+      - .:/app
+    environment:
+      NODE_ENV: development

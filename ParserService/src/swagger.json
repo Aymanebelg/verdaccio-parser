@@ -1,0 +1,204 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PARSER API",
+    "version": "1.0.0",
+    "description": "API for managing JSON schemas"
+  },
+  "basePath": "/",
+  "schemes": ["http"],
+  "paths": {
+    "/api/schemas": {
+      "post": {
+        "summary": "Create a new JSON schema",
+        "description": "Endpoint to create a new JSON schema",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JSONSchema"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "JSON schema created successfully"
+          },
+          "400": {
+            "description": "Invalid input error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all JSON schemas",
+        "description": "Endpoint to get all JSON schemas",
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/api/schemas/{id}": {
+      "put": {
+        "summary": "Update JSON schema by ID",
+        "description": "Endpoint to update a JSON schema by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JSONSchema"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON schema updated successfully"
+          },
+          "400": {
+            "description": "Invalid input error"
+          },
+          "404": {
+            "description": "Schema not found error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get JSON schema by ID",
+        "description": "Endpoint to get a JSON schema by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "404": {
+            "description": "Schema not found error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete JSON schema by ID",
+        "description": "Endpoint to delete a JSON schema by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "JSON schema deleted successfully"
+          },
+          "404": {
+            "description": "Schema not found error"
+          }
+        }
+      }
+    },
+    "/api/schemas/search/{name}": {
+      "get": {
+        "summary": "Search JSON schemas by name",
+        "description": "Endpoint to search JSON schemas by name",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          }
+        }
+      }
+    },
+    "/api/schemas/parsePDF": {
+      "post": {
+        "summary": "Parse a single PDF file",
+        "description": "Endpoint to parse a single PDF file",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Invalid file type error"
+          },
+          "404": {
+            "description": "No PDF file uploaded error"
+          }
+        }
+      }
+    },
+    "/api/schemas/parsePDFs": {
+      "post": {
+        "summary": "Parse multiple PDF files",
+        "description": "Endpoint to parse multiple PDF files",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "files",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "No PDF files uploaded error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "JSONSchema": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "object"
+        },
+        "version": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
